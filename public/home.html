@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #4c2b08;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4c2b08;
+}
+
+header .logo img {
+    height: 80px;
+    width: 120px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 0px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding-right: 45px;
+    font-weight: 800;
+}
+
+.hero {
+    background-color: white;
+    padding-top: 180px ;
+    padding-bottom: 0%;
+    text-align: center;
+    height: 500px;
+    background-image: url('/images/header.png');
+    background-size: 100% 650px;
+
+            background-position: top;
+            background-repeat: no-repeat;
+            color: #4c2b08;
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero p {
+    font-size: 1.2em;
+    position: relative;
+    top: 170px;
+}
+
+.cta-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #6D3914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    top: 170px;
+}
+
+.cta-button:hover {
+    background-color: #4c2b08;
+}
+
+.subheader {
+    padding: 30px 20px;
+    padding-left: 200px;
+    padding-right: 200px;
+    text-align: center;
+    background-color: #f9f1e6;
+}
+.subheader p{
+    padding-top: 20px;
+}
+
+
+.introduction {
+    display: flex;
+    align-items: center;
+    padding: 30px 20px;
+    background-color: white;
+}
+.introduction h3{
+    font-size: 40px;
+    
+}
+
+.introduction img {
+    width: 680px;
+    height: 500px;
+    margin-right: 20px;
+}
+
+.introduction div {
+    max-width: 400px;
+}
+
+.services {
+    display: flex;
+    justify-content: space-around;
+    height: 700px;
+    width: 100%;
+    background-image: url('/images/2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+        
+}
+
+
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #4c2b08;
+}
+
+.quick-links,
+.footer-contact {
+    flex: 1;
+    text-align: center;
+    color: #e0e0e0;
+    
+}
+.quick-links a{
+    text-decoration: none;
+    color: #e0e0e0;
+    margin-right: 40px;
+}
+
+.footer-logo img {
+    height: 80px;
+    width: 120px;
+}
+
+</style>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/images/logoss.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/" class="login-button">Login</a></li>
+                <li><a href="/register" class="login-button">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p>Find Your Perfect Match Through Your Love for Food. Discover connections based on your favorite cuisines. 
+            </p>
+            <button class="cta-button" onclick="window.location.href='/'">LOGIN</button>
+        </div>
+    </section>
+
+    <section class="subheader">
+        <h2>Turn Your Culinary Passions into Meaningful Connections</h2>
+        <p>At SizzleSwipe, we believe that food is more than just sustenance—it's a way to connect with others. Whether you love spicy Indian curries, savory Italian pasta, or sushi from Japan, there's someone out there who shares your tastes. Join us and meet your culinary match today.</p>
+    </section>
+
+    <section class="introduction">
+        <img src="/images/pics1.png" alt="Introduce Yourself">
+        <div>
+            <h3>Who Are We?</h3>
+            <p>We are SizzleSwipe, a unique dating platform that matches people based on their favorite cuisines. Our mission is to create meaningful connections through shared culinary passions. Whether you're a foodie at heart or just love a good meal, you're in the right place.</p>
+
+        </div>
+    </section>
+
+    <section class="services">
+        
+    </section>
+
+    <footer>
+        <div class="quick-links">
+            <a href="/">Login</a>
+            <a href="/register">Sign Up</a>
+        </div>
+        <div class="footer-logo">
+            <img src="/images/logoss.png" alt="Logo">
+        </div>
+        <div class="footer-contact">
+            <p>Social Media | Contact | Location</p>
+        </div>
+    </footer>
+</body>
+</html>

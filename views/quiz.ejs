@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step-by-Step Quiz</title>
+  <style>
+
+body {
+      font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      letter-spacing: 2px;
+      font-size: 25px;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      background-color: #f9e2ca;
+background-image: url('/images/quizback.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+    }
+    .question {
+      display: none;
+      width: 500px;
+      
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px #4c2b08;
+      background-color: #efcead;
+    }
+    .question.active {
+      display: block;
+      margin-top: 230px;
+      margin-right: 30px;
+    }
+    .question label {
+      display: block;
+      margin-bottom: 50px;
+      margin-top: 30px;
+      font-weight: bold;
+    }
+    .question select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    #navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px auto;
+      width: 300px;
+    }
+    #navigation button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #f9e2ca;
+      color: #4c2b08;
+      cursor: pointer;
+    }
+    #navigation button[disabled] {
+      background-color: #ccc;
+    }
+
+    #submitBtn {
+  background-color: #efcead; /* Change this to your desired color */
+  color: #4c2b08; /* Text color */
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top:570px;
+  left : 750px;
+}
+
+#submitBtn:hover {
+  background-color: #f4f4f4; /* Darker shade for hover effect */
+}
+
+
+  </style>
+</head>
+<body>
+  
+  <form id="quizForm" action="/quiz" method="POST">
+    <!-- Question 1 -->
+    <div class="question active">
+      <label for="hobby">What is your favorite hobby?</label>
+      <select id="hobby" name="hobby" required>
+        <option value="">Select a hobby</option>
+        <option value="Reading">Reading</option>
+        <option value="Cooking">Cooking</option>
+        <option value="Traveling">Traveling</option>
+        <option value="Sports">Sports</option>
+        <option value="Gaming">Gaming</option>
+      </select>
+    </div>
+    <!-- Question 2 -->
+    <div class="question">
+      <label for="dream">What is your dream destination?</label>
+      <select id="dream" name="dream" required>
+        <option value="">Select a destination</option>
+        <option value="Paris">Paris</option>
+        <option value="Tokyo">Tokyo</option>
+        <option value="New York">New York</option>
+        <option value="Bali">Bali</option>
+        <option value="Sydney">Sydney</option>
+      </select>
+    </div>
+        <!-- Question 3 -->
+        <div class="question">
+          <label for="pet">Do you have a pet? If yes, what kind?</label>
+          <select id="pet" name="pet">
+            <option value="">Select a pet</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+            <option value="Bird">Bird</option>
+            <option value="Fish">Fish</option>
+            <option value="No Pet">No Pet</option>
+          </select>
+        </div>
+        <!-- Question 4 -->
+        <div class="question">
+          <label for="adjectiveSoul">An adjective describing your soul or personality:</label>
+          <select id="adjectiveSoul" name="adjectiveSoul" required>
+            <option value="">Select an adjective</option>
+            <option value="Kind">Kind</option>
+            <option value="Adventurous">Adventurous</option>
+            <option value="Creative">Creative</option>
+            <option value="Compassionate">Compassionate</option>
+            <option value="Bold">Bold</option>
+          </select>
+        </div>
+        <!-- Question 5 -->
+        <div class="question">
+          <label for="activity">What do you do when not engaged in your hobby?</label>
+          <select id="activity" name="activity" required>
+            <option value="">Select an activity</option>
+            <option value="Reading">Reading</option>
+            <option value="Walking">Walking</option>
+            <option value="Watching TV">Watching TV</option>
+            <option value="Exercising">Exercising</option>
+            <option value="Cooking">Cooking</option>
+          </select>
+        </div>
+        <!-- Question 6 -->
+        <div class="question">
+          <label for="personalityAdjective">An adjective describing your personality:</label>
+          <select id="personalityAdjective" name="personalityAdjective" required>
+            <option value="">Select an adjective</option>
+            <option value="Friendly">Friendly</option>
+            <option value="Outgoing">Outgoing</option>
+            <option value="Reserved">Reserved</option>
+            <option value="Energetic">Energetic</option>
+            <option value="Thoughtful">Thoughtful</option>
+          </select>
+        </div>
+        <!-- Question 7 -->
+        <div class="question">
+          <label for="somethingYouLove">Something you love:</label>
+          <select id="somethingYouLove" name="somethingYouLove" required>
+            <option value="">Select something you love</option>
+            <option value="Family">Family</option>
+            <option value="Music">Music</option>
+            <option value="Nature">Nature</option>
+            <option value="Art">Art</option>
+            <option value="Food">Food</option>
+          </select>
+        </div>
+        <!-- Question 8 -->
+        <div class="question">
+          <label for="philosophy">Philosophy or belief:</label>
+          <select id="philosophy" name="philosophy" required>
+            <option value="">Select a philosophy or belief</option>
+            <option value="Positivity">Positivity</option>
+            <option value="Equality">Equality</option>
+            <option value="Simplicity">Simplicity</option>
+            <option value="Curiosity">Curiosity</option>
+            <option value="Adventure">Adventure</option>
+          </select>
+        </div>
+        <!-- Question 9 -->
+        <div class="question">
+          <label for="energy">An adjective describing the energy you’re looking for:</label>
+          <select id="energy" name="energy" required>
+            <option value="">Select an adjective</option>
+            <option value="Calm">Calm</option>
+            <option value="Exciting">Exciting</option>
+            <option value="Inspiring">Inspiring</option>
+            <option value="Relaxing">Relaxing</option>
+            <option value="Dynamic">Dynamic</option>
+          </select>
+        </div>
+        <!-- Question 10 -->
+        <div class="question">
+          <label for="sharedActivity">Shared activity (something you’d enjoy together):</label>
+          <select id="sharedActivity" name="sharedActivity" required>
+            <option value="">Select a shared activity</option>
+            <option value="Cooking">Cooking</option>
+            <option value="Hiking">Hiking</option>
+            <option value="Playing Games">Playing Games</option>
+            <option value="Movie Night">Movie Night</option>
+            <option value="Traveling">Traveling</option>
+          </select>
+        </div>
+    
+        
+    
+
+    <!-- Navigation Buttons -->
+    <div id="navigation">
+      <button type="button" id="prevBtn" disabled>Previous</button>
+      <button type="button" id="nextBtn">Next</button>
+    </div>
+    <button type="submit" id="submitBtn" style="display: none;">Submit</button>
+  </form>
+
+  <script>
+    const questions = document.querySelectorAll('.question');
+    let currentQuestionIndex = 0;
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function updateQuestionVisibility() {
+      questions.forEach((question, index) => {
+        question.classList.toggle('active', index === currentQuestionIndex);
+      });
+
+      // Update button states
+      prevBtn.disabled = currentQuestionIndex === 0;
+      nextBtn.style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'inline-block';
+      submitBtn.style.display = currentQuestionIndex === questions.length - 1 ? 'inline-block' : 'none';
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        updateQuestionVisibility();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        updateQuestionVisibility();
+      }
+    });
+
+    document.getElementById('quizForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const formData = new FormData(this);
+      const formObject = {};
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formObject),
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          alert('Your quiz data has been saved successfully!');
+          window.location.href = `/myprofile/${data.userId}`;
+        } else {
+          alert('Failed to save data. Please try again.');
+        }
+      } catch (error) {
+        alert('An error occurred. Please try again later.');
+      }
+    });
+
+    updateQuestionVisibility(); // Initial call to set up the first question
+  </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      background-color: #f9e2ca;
+background-image: url('/images/payment.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #f5d7ba;
+      border: 2px solid #8a5e3b;
+      border-radius: 15px;
+      width: 340px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 260px;
+    }
+
+    .card:first-child {
+      border: 2px solid #8a5e3b;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #4c2b08;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: block;
+      color: #4c2b08;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    button {
+  background-color: #4c2b08;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+    button:hover {
+      background-color: black;
+    }
+
+    .error, .success {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: red;
+    }
+    input {
+      width: 320px;
+    }
+
+    .success {
+      color: green;
+    }
+    .back {
+    position: absolute;
+    top:15px;
+    border : 2px solid #111;
+    border-radius: 100%;
+    width: 25px;
+    left : 10px;
+}
+h1 {
+  position: absolute;
+  top:130px;
+  left:565px;
+  font-size: 50px;
+  color: #4c2b08;
+}
+  </style>
+</head>
+<body>
+  
+  <h1 class="heading"><i class="fa-solid fa-wand-magic-sparkles" style="color: #4c2b08;"></i> Update</h1>
+  <div class="container">
+    <!-- Update Profile -->
+    <form id="updateProfileForm" class="card">
+      <h2>Profile Details</h2>
+      <div class="error" id="updateProfileError"></div>
+      <div class="success" id="updateProfileSuccess"></div>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter new username" />
+      <label for="email">Profile Picture</label>
+      <input type="text" id="imageUrl" name="imageUrl" placeholder="Enter new profile picture Url" />
+      <label for="cuisine">Preferred Cuisine</label>
+      <input type="text" id="cuisine" name="cuisine" placeholder="Enter preferred cuisine" />
+      <button type="submit">Update Profile</button>
+    </form>
+
+    <!-- Update Password -->
+    <form id="updatePasswordForm" class="card">
+      <h2>Change Password</h2>
+      <div class="error" id="updatePasswordError"></div>
+      <div class="success" id="updatePasswordSuccess"></div>
+      <label for="currentPassword">Current Password</label>
+      <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password" />
+      <label for="newPassword">New Password</label>
+      <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password" />
+      <button type="submit">Update Password</button>
+    </form>
+
+    <!-- Retake Quiz -->
+    <form id="retakeQuizForm" class="card">
+      <h2>Retake Quiz</h2>
+      <div class="error" id="retakeQuizError"></div>
+      <div class="success" id="retakeQuizSuccess"></div>
+      <button type="submit">Retake Quiz</button>
+    </form>
+  </div>
+
+  <script>
+
+
+
+    // Update Profile Form Submission
+    document.getElementById('updateProfileForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorDiv = document.getElementById('updateProfileError');
+      const successDiv = document.getElementById('updateProfileSuccess');
+      errorDiv.textContent = '';
+      successDiv.textContent = '';
+
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/profile', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          successDiv.textContent = result.message;
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
+        } else {
+          errorDiv.textContent = result.message || 'Failed to update profile';
+        }
+      } catch (error) {
+        errorDiv.textContent = 'An error occurred while updating profile';
+        console.error(error);
+      }
+    });
+
+    // Update Password Form Submission
+    document.getElementById('updatePasswordForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorDiv = document.getElementById('updatePasswordError');
+      const successDiv = document.getElementById('updatePasswordSuccess');
+      errorDiv.textContent = '';
+      successDiv.textContent = '';
+
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/profile/password', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          successDiv.textContent = result.message;
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
+        } else {
+          errorDiv.textContent = result.message || 'Failed to update password';
+        }
+      } catch (error) {
+        errorDiv.textContent = 'An error occurred while updating password';
+        console.error(error);
+      }
+    });
+
+    // Retake Quiz Form Submission
+    document.getElementById('retakeQuizForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errorDiv = document.getElementById('retakeQuizError');
+    const successDiv = document.getElementById('retakeQuizSuccess');
+    errorDiv.textContent = '';
+    successDiv.textContent = '';
+
+    try {
+      const response = await fetch('/user_quiz', {
+        method: 'DELETE',
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        successDiv.textContent = result.message;
+        setTimeout(() => {
+          window.location.href = '/quiz';
+        }, 2000);
+      } else {
+        errorDiv.textContent = result.message || 'Failed to retake quiz';
+      }
+    } catch (error) {
+      errorDiv.textContent = 'An error occurred while retaking quiz';
+      console.error(error);
+    }
+  });
+  </script>
+</body>
+</html>

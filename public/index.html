@@ -12,16 +12,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('/images/Login.png'); /* Replace 'background.jpg' with your image file name */
+            background-image: url('/images/Login.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-color: rgba(255, 255, 255, 0.1); 
+            background-blend-mode: overlay;
+            
         }
         form {
             position: absolute;
             left: 460px;
             font-size: 30px;
-            top : 160px;
+            top: 140px;
             color: whitesmoke;
             font-weight: 600;
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -29,10 +32,10 @@
         h1 {
             position: absolute;
             left: 520px;
-            top: 10px;
+            top : 1px;
             font-size: 60px;
             color: #4C2B08;
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         input[type="text"],
         input[type="password"] {
@@ -57,6 +60,25 @@
         button:hover {
             background-color: #4C2B08;
         }
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 30px;
+            font-weight: 800;
+            color: #4C2B08;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            position: absolute;
+            left: 430px;
+            top: 410px;
+        }
+        .signup-link a {
+            color: #6D3914;
+            text-decoration: none;
+        }
+        .white
+        {
+            color: aliceblue;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +92,9 @@
         
         <button type="submit">Login</button>
     </form>
+    <div class="signup-link">
+        <p>Not yet registered? <a href="register.html"> <span class = "white"> Sign up now</span></a></p> 
+    </div>
     <div id="message"></div>
 
     <script>
@@ -91,7 +116,9 @@
 
             if (response.ok) {
                 alert('Login successful!');
-                window.location.href = '/suggested-users'; 
+                window.location.href = `/myprofile/${data.userId}`; 
+                //window.location.href = `/quiz`; 
+
             } else {
                 alert(data.message || 'Login failed!');
             }

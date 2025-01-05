@@ -12,7 +12,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('/images/register.png'); /* Replace 'background.jpg' with your image file name */
+            background-image: url('/images/register.png'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -37,7 +37,8 @@
         input[type="text"],
         input[type="email"],
         input[type="url"],
-        input[type="password"] {
+        input[type="password"],
+        select {
             width: 100%;
             padding: 6px;
             margin-bottom: 20px;
@@ -74,12 +75,20 @@
         <input type="email" id="email" name="email" required><br><br>
 
         <label for="cuisine">Favorite Cuisine:</label>
-        <input type="text" id="cuisine" name="cuisine" required><br><br>
+        <select id="cuisine" name="cuisine" required>
+            <option value="" disabled selected>Select your favorite cuisine</option>
+            <option value="Italian">Italian</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Indian">Indian</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Thai">Thai</option>
+            <option value="French">French</option>
+        </select><br><br>
 
         <label for="imageUrl">Image URL:</label>
         <input type="url" id="imageUrl" name="imageUrl" required><br><br>
 
-        
         <button type="submit">Register</button>
     </form>
     <div id="message"></div>

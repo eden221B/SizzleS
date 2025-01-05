@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suggested Users</title>
     <style>
+        /* Existing styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -14,21 +15,19 @@
             flex-direction: column;
             padding: 20px;
             margin: 0;
-            padding: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('/images/user.png'); /* Replace 'background.jpg' with your image file name */
+            background-image: url('/images/user.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-color: rgba(255, 255, 255, 0.1);
+            background-blend-mode: overlay;
         }
 
         h1 {
             position: absolute;
-            left:451px;
-            top : 190px;
+            left:434px;
+            top:200px;
             font-size: 62px;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
@@ -39,15 +38,90 @@
             color: #D7BDA6;
         }
 
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            padding: 10px;
+            z-index: 100;
+            background-color: rgba(94, 67, 39, 0.8); /* Transparent */
+        }
+
+        .navbar img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            margin-left: 30px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-right: 30px;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .navbar .profile {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .navbar .profile a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-left: 900px;
+        }
+
+        .search-container input {
+            width: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-container input:focus {
+            width: 200px;
+            opacity: 1;
+            background-color: white;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container .search-icon {
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
         .card-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 50px;
-            position: relative;
-            top:125px;
+            margin-top: 300px;
         }
-
 
         .card {
             background-color: #4C2B08;
@@ -57,8 +131,8 @@
             width: 200px;
             padding: 15px;
             text-align: center;
-    
         }
+
         .card img {
             width: 100%;
             height: 150px;
@@ -76,37 +150,73 @@
             color: #D7BDA6;
         }
 
-        a {
-            display: block;
-            margin-top: 20px;
+        .card-container a {
             text-decoration: none;
-            color: #4C2B08;
-            border: solid #4C2B08;
-            padding:10px;
-            position: absolute; 
-            top: 86%; 
-            left: 50%;
-            transform: translateX(-50%)
         }
     </style>
 </head>
 <body>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="profile">
+            <img src="<%= user.imageUrl %>" alt="<%= user.username %>">
+            <a href="/myprofile/<%= user.id %>">Hello <%= user.username %>,</a>
+        </div>
+        <div class="search-container">
+            <span class="search-icon" id="search-icon">🔍</span>
+            <input type="text" id="search-bar" placeholder="Search for users...">
+        </div>
+        <div class="nav-links">
+            <a href="/home">Home</a>
+            <a href="/">Logout</a>
+        </div>
+    </div>
+
+    <!-- Suggested Users Heading -->
     <h1>
         <span class="white">Su</span><span class="brown">gges</span><span class="brown">ted us</span><span class="white">ers</span>
     </h1>
+
+    <!-- Suggested Users Cards -->
     <div class="card-container">
         <% if (suggestedUsers.length > 0) { %>
             <% suggestedUsers.forEach(user => { %>
-                <div class="card">
-                    <img src="<%= user.imageUrl %>" alt="<%= user.username %>">
-                    <h3><%= user.username %></h3>
-                    <p>Favorite Cuisine: <%= user.cuisine %></p>
-                </div>
+                <a href="/profile/<%= user.id %>" class="card-link">
+                    <div class="card" data-username="<%= user.username.toLowerCase() %>">
+                        <img src="<%= user.imageUrl %>" alt="<%= user.username %>">
+                        <h3><%= user.username %></h3>
+                        <p>Favorite Cuisine: <%= user.cuisine %></p>
+                    </div>
+                </a>
             <% }) %>
         <% } else { %>
             <p>No suggestions available.</p>
         <% } %>
     </div>
-    <a href="/">Logout</a>
+
+    <script>
+        // JavaScript for filtering user cards
+        const searchBar = document.getElementById('search-bar');
+        const searchIcon = document.getElementById('search-icon');
+        const cards = document.querySelectorAll('.card');
+
+        // Toggle focus on search bar when search icon is clicked
+        searchIcon.addEventListener('click', () => {
+            searchBar.focus();
+        });
+
+        searchBar.addEventListener('input', () => {
+            const searchText = searchBar.value.toLowerCase();
+            cards.forEach(card => {
+                const username = card.getAttribute('data-username');
+                if (username.includes(searchText)) {
+                    card.parentElement.style.display = 'block';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
